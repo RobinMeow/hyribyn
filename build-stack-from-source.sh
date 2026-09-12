@@ -13,9 +13,9 @@ exec > >(tee "$logfile") 2>&1
 # how to build hyprland on fedora
 # https://github.com/hyprwm/Hyprland/discussions/284
 
-source "$RIBYN_ROOT/lib/hypr/env.sh"
-source "$RIBYN_ROOT/core-utils.sh"
-source "$RIBYN_ROOT/core/run_on_distro.sh"
+source "$HYRIBYN/lib/hypr/env.sh"
+source "$HYRIBYN/core-utils.sh"
+source "$HYRIBYN/core/run_on_distro.sh"
 
 if on_arch; then
 	error "ERROR: Use pacman on archlinux to install hyperland. use pacman -S hyprland instead."
@@ -45,8 +45,8 @@ elif on_fedora; then
 		gcc \
 		gcc-c++
 
-	source "$RIBYN_ROOT/core/source-manager.sh"
-	source "$RIBYN_ROOT/lib/hypr/install-hypr-from-source.sh"
+	source "$HYRIBYN/core/source-manager.sh"
+	source "$HYRIBYN/lib/hypr/install-hypr-from-source.sh"
 
 	# SC2016 $SOURCE_NAME does not expand here on purpose
 	# shellcheck disable=SC2016
@@ -54,21 +54,21 @@ elif on_fedora; then
 
 	hypr_install "hyprland-protocols" \
 		"https://github.com/hyprwm/hyprland-protocols" \
-		"$RIBYN_HYPR_HYPRLAND_PROTOCOLS_GITREV" \
+		"$HYRIBYN_HYPRLAND_PROTOCOLS_GITREV" \
 		"$pkg_config_exists"
 
 	sudo dnf install --assumeyes \
 		pugixml-devel
 	hypr_install "hyprwayland-scanner" \
 		"https://github.com/hyprwm/hyprwayland-scanner.git" \
-		"$RIBYN_HYPR_HYPRWAYLAND_SCANNER_GITREV" \
+		"$HYRIBYN_HYPRWAYLAND_SCANNER_GITREV" \
 		"$pkg_config_exists"
 
 	sudo dnf install --assumeyes \
 		pixman-devel
 	hypr_install "hyprutils" \
 		"https://github.com/hyprwm/hyprutils.git" \
-		"$RIBYN_HYPR_HYPRUTILS_GITREV" \
+		"$HYRIBYN_HYPRUTILS_GITREV" \
 		"$pkg_config_exists"
 
 	sudo dnf install --assumeyes \
@@ -84,12 +84,12 @@ elif on_fedora; then
 	# file has libpng-devel
 	hypr_install "hyprgraphics" \
 		"https://github.com/hyprwm/hyprgraphics.git" \
-		"$RIBYN_HYPR_HYPRGRAPHICS_GITREV" \
+		"$HYRIBYN_HYPRGRAPHICS_GITREV" \
 		"$pkg_config_exists"
 
 	hypr_install "hyprlang" \
 		"https://github.com/hyprwm/hyprlang.git" \
-		"$RIBYN_HYPR_HYPRLANG_GITREV" \
+		"$HYRIBYN_HYPRLANG_GITREV" \
 		"$pkg_config_exists"
 
 	sudo dnf install --assumeyes \
@@ -97,7 +97,7 @@ elif on_fedora; then
 		tomlplusplus-devel
 	hypr_install "hyprcursor" \
 		"https://github.com/hyprwm/hyprcursor" \
-		"$RIBYN_HYPR_HYPRCURSOR_GITREV" \
+		"$HYRIBYN_HYPRCURSOR_GITREV" \
 		"$pkg_config_exists"
 
 	sudo dnf install --assumeyes \
@@ -110,7 +110,7 @@ elif on_fedora; then
 	# 	systemd-devel is fedoras version of libudev. see here https://github.com/dcuddeback/libudev-sys
 	hypr_install "aquamarine" \
 		"https://github.com/hyprwm/aquamarine" \
-		"$RIBYN_HYPR_AQUAMARINE_GITREV" \
+		"$HYRIBYN_AQUAMARINE_GITREV" \
 		"$pkg_config_exists"
 
 	# xdg-desktop-portal-hyprland
@@ -121,14 +121,14 @@ elif on_fedora; then
 		sdbus-cpp-devel
 	hypr_install "xdg-desktop-portal-hyprland" \
 		"https://github.com/hyprwm/xdg-desktop-portal-hyprland" \
-		"$RIBYN_HYPR_XDG_DESKTOP_PORTAL_HYPRLAND_GITREV" \
+		"$HYRIBYN_XDG_DESKTOP_PORTAL_HYPRLAND_GITREV" \
 		'[[ -x "/usr/libexec/xdg-desktop-portal-hyprland" ]]'
 
 	# SC2016 $SOURCE_NAME does not expand here on purpose
 	# shellcheck disable=SC2016
 	hypr_install "hyprwire" \
 		"https://github.com/hyprwm/hyprwire.git" \
-		"$RIBYN_HYPR_HYPRWIRE_GITREV" \
+		"$HYRIBYN_HYPRWIRE_GITREV" \
 		"$pkg_config_exists"
 
 	sudo dnf install --assumeyes \
@@ -136,7 +136,7 @@ elif on_fedora; then
 		inotify-tools-devel
 	hypr_install "hyprtoolkit" \
 		"https://github.com/hyprwm/hyprtoolkit.git" \
-		"$RIBYN_HYPR_HYPRTOOLKIT_GITREV" \
+		"$HYRIBYN_HYPRTOOLKIT_GITREV" \
 		"$pkg_config_exists"
 
 	is_hyprland_guiutils_installed='command -v hyprland-dialog >/dev/null 2>&1'
@@ -146,7 +146,7 @@ elif on_fedora; then
 	is_hyprland_guiutils_installed="${is_hyprland_guiutils_installed} && command -v hyprland-welcome >/dev/null 2>&1"
 	hypr_install "hyprland-guiutils" \
 		"https://github.com/hyprwm/hyprland-guiutils" \
-		"$RIBYN_HYPR_HYPRLAND_GUIUTILS_GITREV" \
+		"$HYRIBYN_HYPRLAND_GUIUTILS_GITREV" \
 		"$is_hyprland_guiutils_installed"
 
 	sudo dnf install --assumeyes \
@@ -166,7 +166,7 @@ elif on_fedora; then
 	}
 	hypr_install "hyprland" \
 		"https://github.com/hyprwm/Hyprland" \
-		"$RIBYN_HYPR_HYPRLAND_GITREV" \
+		"$HYRIBYN_HYPRLAND_GITREV" \
 		'command -v hyprland >/dev/null 2>&1' \
 		build_and_install_hyprland
 else

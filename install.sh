@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$RIBYN_ROOT/lib/hypr/env.sh"
-
-source "$RIBYN_ROOT/core-utils.sh"
+export HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
+source "$HYRIBYN/env.sh"
+source "$HYRIBYN/core-utils.sh"
 info "installing hypr"
 
-source "$RIBYN_ROOT/core/run_on_distro.sh"
-source "$RIBYN_ROOT/lib/hypr/install-hypr-from-source.sh"
+source "$HYRIBYN/run_on_distro.sh"
+source "$HYRIBYN/install-hypr-from-source.sh"
 
 if on_arch; then
 	sudo pacman -S --needed --noconfirm \
@@ -30,7 +30,7 @@ if on_arch; then
 	# removed qt5ct. apparently I can only choose one of em
 	# hyprpicker is just nice to have. install standalone cli tool.
 elif on_fedora; then
-	"$RIBYN_ROOT/lib/hypr/build-stack-from-source.sh"
+	"$HYRIBYN/build-stack-from-source.sh"
 
 	# hyprpolkitagent
 	# CMake Warning (dev) at /usr/lib64/cmake/Qt6Core/Qt6CoreMacros.cmake:3565 (message):
@@ -51,7 +51,7 @@ elif on_fedora; then
 		polkit-qt6-1-devel
 	hypr_install "hyprpolkitagent" \
 		"https://github.com/hyprwm/hyprpolkitagent.git" \
-		"$RIBYN_HYPR_HYPRPOLKITAGENT_GITREV" \
+		"$HYRIBYN_HYPRPOLKITAGENT_GITREV" \
 		'[[ -x "/usr/libexec/hyprpolkitagent" ]]'
 
 	sudo dnf install --assumeyes \
@@ -64,12 +64,12 @@ elif on_fedora; then
 	source_bin_exists='command -v $SOURCE_NAME >/dev/null 2>&1'
 	hypr_install "hyprshutdown" \
 		"https://github.com/hyprwm/hyprshutdown.git" \
-		"$RIBYN_HYPR_HYPRSHUTDOWN_GITREV" \
+		"$HYRIBYN_HYPRSHUTDOWN_GITREV" \
 		"$source_bin_exists"
 
 	hypr_install "hyprpaper" \
 		"https://github.com/hyprwm/hyprpaper.git" \
-		"$RIBYN_HYPR_HYPRPAPER_GITREV" \
+		"$HYRIBYN_HYPRPAPER_GITREV" \
 		"$source_bin_exists"
 
 	sudo dnf install --assumeyes \
@@ -79,7 +79,7 @@ elif on_fedora; then
 	# even tho it builds and installs without. prolly runtime dep.
 	hypr_install "hyprlock" \
 		"https://github.com/hyprwm/hyprlock.git" \
-		"$RIBYN_HYPR_HYPRLOCK_GITREV" \
+		"$HYRIBYN_HYPRLOCK_GITREV" \
 		"$source_bin_exists"
 
 	sudo dnf install --assumeyes \
@@ -89,7 +89,7 @@ elif on_fedora; then
 	# even tho it builds and installs without. prolly runtime dep.
 	hypr_install "hyprpicker" \
 		"https://github.com/hyprwm/hyprpicker" \
-		"$RIBYN_HYPR_HYPRPICKER_GITREV" \
+		"$HYRIBYN_HYPRPICKER_GITREV" \
 		"$source_bin_exists"
 else
 	exit_with_distro_not_supported_msg
@@ -114,13 +114,14 @@ function build_hyprmoncfg() {
 
 hypr_install "hyprmoncfg" \
 	"https://github.com/crmne/hyprmoncfg.git" \
-	"$RIBYN_HYPR_HYPRMONCFG_GITREV" \
+	"$HYRIBYN_HYPRMONCFG_GITREV" \
 	'command -v hyprmoncfg >/dev/null 2>&1 && command -v hyprmoncfgd >/dev/null 2>&1' \
 	build_hyprmoncfg
 
-if [[ "$RIBYN_HYPR_HY3_ENABLED" == "yes" ]]; then
+# TODO: make all non hyprland essentials optional
+if [[ "$HYRIBYN_HY3_ENABLED" == "yes" ]]; then
 	hypr_install "hy3" \
 		"https://github.com/outfoxxed/hy3" \
-		"$RIBYN_HYPR_HY3_GITREV" \
+		"$HYRIBYN_HY3_GITREV" \
 		'[[ -f "/usr/lib/libhy3.so" ]]'
 fi

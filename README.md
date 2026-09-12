@@ -9,6 +9,22 @@ build hyprland from source on non arch distros.
 Currently supported distros:
 fedora
 
+## installation
+
+```sh
+# the git directory of all the git repos following the unix posix conventions
+# for example:
+# ~/.local/share/hyribyn/hyribyn will contain this repository
+# ~/.local/share/hyribyn/hyprland will contain the hyprland repository
+export HYRIBYN_ROOT=${HYRIBYN_ROOT:-"$HOME/.local/share/hyribyn"} \
+  && git clone "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
+  "$HYRIBYN_ROOT/hyribyn/install.sh"
+```
+
+> You may freely change HYRIBYN envvariable in your .zshenv / .bashenv
+its recommended to put `export HYRIBYN_ROOT="$HOME/.local/share/hyribyn"`
+into your dotfiles repository, but not required.
+
 ## philosophy and contributions
 
 minimal, stable
