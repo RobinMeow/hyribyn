@@ -2,7 +2,6 @@
 set -euo pipefail
 
 source "$RIBYN_ROOT/lib/hypr/env.sh"
-[[ "$RIBYN_HYPR_ENABLED" == "no" ]] && exit 0
 
 source "$RIBYN_ROOT/core/utils.sh"
 info "installing hypr"

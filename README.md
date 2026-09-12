@@ -18,7 +18,16 @@ and mention contributions are welcome, whithin the philosophy
 ## Features
 
 TODO: list features and non hyprland apps
+
 - [x] rollback to previous working state
+- [x] hyprmoncfg
+- [x] hyprmoncfg
+- [x] hyprshutdown
+- [x] hyprpaper
+- [x] mpvpaper
+- [x] hyprlock
+- [x] hyprpicker
+- [x] hy3
 
 ## planned
 
@@ -38,3 +47,22 @@ when setting the env to specific git revs it is helpful to know, that
 you need to try to build it in docker, to get the required deps, you
 can just look into the `CMakeLists.txt` to see execat minimum dependencies
 and optional depencencies.
+
+## xdg-desktop-portal
+
+hyprland-session.target
+xdg-desktop-portal requires a graphical session target or it refuses to start.
+`systemctl --user edit --full --force hyprland-session.target`
+to create the config file
+
+> this has been done already. and is put into this repo as file.
+just keeping this to know how to re-generate it.
+
+## Tasks
+
+I dont use tickets. Im much more productive, but just writing it into
+the readme to keep track of stuff.
+
+- utils.sh
+- run_on_distro and os-detect
+- source-manager
