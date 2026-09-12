@@ -1,13 +1,24 @@
 # hyribyn
 
-this is already working, in [ribynlinux](https://github.com/RobinMeow/ribynlinux)
-which is my dotfiles repo. I working on extracting the hyprland build from source
-scripts, to share them with the communiy.
+---
+
+## this is already working, in [ribynlinux](https://github.com/RobinMeow/ribynlinux) which is my dotfiles repo. I working on extracting the hyprland build from source scripts, to share them with the communiy
 
 build hyprland from source on non arch distros.
 
 Currently supported distros:
 fedora
+
+> Your contributions are welcome to add from source builds for other distros.
+Since I will only maintain fedora, however, however the foundation is the same for
+all. Adding another distro is pretty straigt forward. Its mainly just looking for
+the same packages, which might be named differently.
+For example: for a from source build on arch you need the `cairo` package
+`sudo pacman -S cairo` but on fedora you need to install `cairo-devel` package
+`sudo dnf install cairo-devel` and on Ubuntu its the `libcairo2-dev` package
+`sudo apt install libcairo2-dev`. Point is, the same package can have
+different names on different distros. But building and installation is
+mostly the same for all.
 
 ## installation
 
@@ -31,6 +42,17 @@ minimal, stable
 TODO: add short notes on why this repo exists,
 and mention contributions are welcome, whithin the philosophy
 
+### Planned
+
+**custom build flags:**
+integrate these build flags so you can disable the ones you dont need,
+for a even more minimal build.
+NO_XWAYLAND - Removes XWayland support
+NO_SYSTEMD - Removes systemd dependencies
+NO_UWSM - Does not install the hyprland-uwsm.desktop file
+NO_HYPRPM - Does not build and install hyprpm
+[hyprland wiki - customer build flags](https://wiki.hypr.land/Getting-Started/Installation/#custom-build-flags)
+
 ## features
 
 TODO: list features and non hyprland apps
@@ -39,25 +61,61 @@ TODO: list features and non hyprland apps
 
 ## hypr ecosystem
 
-- [x] hyprshutdown
-- [x] hyprtoolkit
-- [x] hyprpolkitagent
-- [x] hyprmoncfg
-- [x] hyprpaper
-- [x] mpvpaper
-- [x] hyprlock
-- [x] hyprpicker
-- [x] hy3
+Uses the `sourcerer` to build the whole hyprland stack from source
+as well as optional dependencies, and other hypr-apps and hypr-programms.
+This includes building 11 dependecnies from source + hyprland itself:
+
+- [x] `hyprland-protocols`
+- [x] `hyprwayland-scanner`
+- [x] `hyprutils`
+- [x] `hyprgraphics`
+- [x] `hyprlang`
+- [x] `hyprcursor`
+- [x] `aquamarine`
+- [x] `xdg-desktop-portal-hyprland`
+- [x] `hyprwire`
+- [x] `hyprtoolkit`
+- [x] `hyprland`
+as mentioned in the [hyprland wiki - faq](https://wiki.hypr.land/FAQ/#:~:text=The%20order%20in%20which%20you%20must%20build,be%20built%20in%20any%20order%20after%20hyprland.)
+
+and a runtime only dependency which the FAQ does not mention:
+
+- [x] `hyprland-guiutils`_(runtime-only dependency. formerly hyprland-qtutils)_
+
+and other hypr-apps and hypr-programms:
+
+- [x] `hyprpolkitagent` to use hyprlands optional permission system
+- [x] `hyprshutdown` logging out of hyprland. the official recommended way.
+- [x] `hyprpaper` background wallpaper engine
+- [x] `hyprlock` lockscreen
+- [x] `hyprpicker` use your mouse as color picker on whatever the screen is
+  rendering currently (nice for ricing)
+- [x] `hyprmoncfg` generate a lua configuration for your monitors
+  on the fly in a tui
+- [x] `hy3` sway/i3 like window tiling layout strategy
+- [-] `mpvpaper` see [ribynlinux/mpvpaper](https://github.com/RobinMeow/ribynlinux/tree/master/lib/mpvpaper)
+  for an example using [sourcerer](https://github.com/RobinMeow/sourcerer)
+  on how to build and install mpvpaper from source
+- [-] `wl-freeze` see [ribynlinux/wl-freeze](https://github.com/RobinMeow/ribynlinux/tree/master/lib/wl-freeze)
+  for an example using [sourcerer](https://github.com/RobinMeow/sourcerer)
+  on how to build and install wl-freeze from source
+
+> `mpvpaper` and `wl-freeze` do not depend on hyprland.
+Therefore they will not be included in this repository.
 
 ## planned
 
+- [ ] allow installation to /usr/local instead of /usr which is the default
+  shown in all the hypr-app's READMEs. To avoid conflict with pm installed versions.
+  see [Limitations](#limitation) for more on this
 - [ ] automate the process of reading minimum dependecies
   all based on hyprland version.
   this will discard all env variables, in favor of one single one for hyprland
+- [ ] other programms which are based on hyprland TODO: acceptance crit.
 
 > these are planned, but I do not plan on doing them any time soon.
-The state of this repo already solves its purpose well enough.
-So any additions are just sugar currently.
+The state of this repo already solves its purpose.
+So any additions are just sugar.
 
 ## configuration
 
@@ -76,12 +134,22 @@ xdg-desktop-portal requires a graphical session target or it refuses to start.
 to create the config file
 
 > this has been done already. and is put into this repo as file.
-just keeping this to know how to re-generate it.
+just keeping this to know how to re-generate it, if ever needed.
 
-## Tasks
+## Limitation
 
-I dont use tickets. Im much more productive, but just writing it into
-the readme to keep track of stuff.
-
-- run_on_distro and os-detect
-- source-manager
+- arch uses `pacman` as package manager. Which does not allow to install older versions
+  of a package. _(You wouldnt be on a rolling-distro like arch if this is important
+  to you)_ This means, if a dependency, lets say `cairo` makes an update with a
+  breaking change, and hyprland also updates accordingly _(as it should)_ and
+  you also updated your hyprland installation accordingly _(as you should)_ it
+  will become incredibly difficult to re-build your previous hyprland
+  binaries _(version)_. To work around this, you should just update to a latest
+  stable version. Just mentioning this, becuase this repo does support rollbacks
+  as long as all dependencies did not update with breaking changes.
+- to avoid issues, you may not install any hpyrland stuff using your package manger,
+  if it is already installed from source. If you do it anyways, and things get messy,
+  you should uninstall the ones you installed with your package manager,
+  and then rebuild from source again. Should be fine, but no promises.
+  I have done worse and managed to recover, but I do 40h a week of software
+  development for a living, so thats not comparable to everyone.

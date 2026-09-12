@@ -12,6 +12,9 @@ exec > >(tee "$logfile") 2>&1
 #
 # how to build hyprland on fedora
 # https://github.com/hyprwm/Hyprland/discussions/284
+# FAQ: includes build order:
+# https://wiki.hypr.land/FAQ
+# its partly out of date. still nice to have tho.
 
 source "$HYRIBYN/lib/hypr/env.sh"
 source "$HYRIBYN/core-utils.sh"
