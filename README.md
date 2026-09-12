@@ -15,14 +15,18 @@ minimal, stable
 TODO: add short notes on why this repo exists,
 and mention contributions are welcome, whithin the philosophy
 
-## Features
+## features
 
 TODO: list features and non hyprland apps
 
 - [x] rollback to previous working state
-- [x] hyprmoncfg
-- [x] hyprmoncfg
+
+## hypr ecosystem
+
 - [x] hyprshutdown
+- [x] hyprtoolkit
+- [x] hyprpolkitagent
+- [x] hyprmoncfg
 - [x] hyprpaper
 - [x] mpvpaper
 - [x] hyprlock
@@ -63,6 +67,5 @@ just keeping this to know how to re-generate it.
 I dont use tickets. Im much more productive, but just writing it into
 the readme to keep track of stuff.
 
-- utils.sh
 - run_on_distro and os-detect
 - source-manager

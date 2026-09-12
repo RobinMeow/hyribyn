@@ -14,7 +14,7 @@ exec > >(tee "$logfile") 2>&1
 # https://github.com/hyprwm/Hyprland/discussions/284
 
 source "$RIBYN_ROOT/lib/hypr/env.sh"
-source "$RIBYN_ROOT/core/utils.sh"
+source "$RIBYN_ROOT/core-utils.sh"
 source "$RIBYN_ROOT/core/run_on_distro.sh"
 
 if on_arch; then

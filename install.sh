@@ -3,7 +3,7 @@ set -euo pipefail
 
 source "$RIBYN_ROOT/lib/hypr/env.sh"
 
-source "$RIBYN_ROOT/core/utils.sh"
+source "$RIBYN_ROOT/core-utils.sh"
 info "installing hypr"
 
 source "$RIBYN_ROOT/core/run_on_distro.sh"
