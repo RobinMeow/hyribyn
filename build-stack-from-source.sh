@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-mkdir -p "$HOME/.local/state/ribyn/"
-logfile="$HOME/.local/state/ribyn/build-stack-from-source.log"
+mkdir -p "$HOME/.local/state/hyribyn/"
+logfile="$HOME/.local/state/hyribyn/build-stack-from-source.log"
 # Append to file and print to terminal simultaneously
 # use --append flag if you want to append, instead of override
 exec > >(tee "$logfile") 2>&1
@@ -16,8 +16,10 @@ exec > >(tee "$logfile") 2>&1
 # https://wiki.hypr.land/FAQ
 # its partly out of date. still nice to have tho.
 
-HYRIBYN=${HYRIBYN_ROOT:-"$HYRIBYN_ROOT/hyribyn"}
-source "$HYRIBYN/lib/hypr/env.sh"
+HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
+HYRIBYN_ROOT=${HYRIBYN_ROOT:-"$HOME/.local/share/hyribyn"}
+HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
+source "$HYRIBYN/env.sh"
 source "$HYRIBYN/core-utils.sh"
 
 if on_archlinux; then
@@ -50,7 +52,7 @@ elif on_fedora; then
 
 	SOURCERER_DEST="$HYRIBYN_ROOT"
 	source "$HYRIBYN/sourcerer/sourcerer.sh"
-	source "$HYRIBYN/lib/hypr/install-hypr-from-source.sh"
+	source "$HYRIBYN/install-hypr-from-source.sh"
 
 	# SC2016 $SOURCE_NAME does not expand here on purpose
 	# shellcheck disable=SC2016

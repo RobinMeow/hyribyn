@@ -82,13 +82,13 @@ fi
 # hyprmoncfg only offers yay for arch
 # so even on arch I prefer build from source
 function build_hyprmoncfg() {
-	run_on_arch \
+	if on_archlinux; then
 		sudo pacman -S --needed --noconfirm \
-		go
-
-	run_on_fedora \
+			go
+	elif on_fedora; then
 		sudo dnf install --assumeyes \
-		go
+			go
+	fi
 
 	go build -o "bin/hyprmoncfg" "./cmd/hyprmoncfg"
 	go build -o "bin/hyprmoncfgd" "./cmd/hyprmoncfgd"
