@@ -102,10 +102,7 @@ hypr_install "hyprmoncfg" \
 	'command -v hyprmoncfg >/dev/null 2>&1 && command -v hyprmoncfgd >/dev/null 2>&1' \
 	build_hyprmoncfg
 
-# TODO: make all non hyprland apps optional
-if [[ "$HYRIBYN_HY3_ENABLED" == "yes" ]]; then
-	hypr_install "hy3" \
-		"https://github.com/outfoxxed/hy3" \
-		"$HYRIBYN_HY3_GITREV" \
-		'[[ -f "/usr/lib/libhy3.so" ]]'
-fi
+hypr_install "hy3" \
+	"https://github.com/outfoxxed/hy3" \
+	"$HYRIBYN_HY3_GITREV" \
+	'[[ -f "/usr/lib/libhy3.so" ]]'
