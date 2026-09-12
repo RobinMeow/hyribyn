@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export HYRIBYN_ROOT=${HYRIBYN_ROOT:-"$HOME/.local/share/hyribyn"}
 export HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
 source "$HYRIBYN/env.sh"
 source "$HYRIBYN/core-utils.sh"

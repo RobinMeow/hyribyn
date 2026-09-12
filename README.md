@@ -1,10 +1,6 @@
 # hyribyn
 
----
-
-## this is already working, in [ribynlinux](https://github.com/RobinMeow/ribynlinux) which is my dotfiles repo. I working on extracting the hyprland build from source scripts, to share them with the communiy
-
-build hyprland from source on non arch distros.
+build hyprland from source with ease on any distro.
 
 Currently supported distros:
 Fedora 44
@@ -20,7 +16,7 @@ For example: for a from source build on arch you need the `cairo` package
 different names on different distros. But building and installation is
 mostly the same for all.
 
-## installation
+## one time installation
 
 ```sh
 # HYRIBYN_ROOT: the git directory of all the git repos to be cloned
@@ -31,8 +27,20 @@ mostly the same for all.
 # export HYRIBYN_DISTRO="fedora" # this is the default
 export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
   && git clone --recurse-submodules "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
-  && "$HYRIBYN_ROOT/hyribyn/install.sh"
+  && "$HYRIBYN_ROOT/hyribyn/install.sh" \
+  && "$HYRIBYN_ROOT/hyribyn/sync.sh"
 ```
+
+## dotfiles automated integration
+
+TODO: write guide on how to integrate and reference my own dotfiles repo
+as an example
+
+_Im currently extracting these scripts from my dotfiles repo,
+to make the accessable to the community. It functionally works,
+but I would suggest to wait, before integrating it in yours.
+Becuase I'm planning on making structure changes, to make it
+more modular to use._
 
 > You may freely change HYRIBYN envvariable in your .zshenv / .bashenv
 its recommended to put `export HYRIBYN_ROOT="$HOME/.local/share/hyribyn"`
@@ -43,6 +51,11 @@ into your dotfiles repository, but not required.
 minimal, stable
 TODO: add short notes on why this repo exists,
 and mention contributions are welcome, whithin the philosophy
+
+join the discord, if you want to contribute.
+You can also open issues, just make sure to not implement stuff
+without prior elaboration.
+[hyribyn discord server](https://discord.gg/6AGtnMkpM)
 
 ### Planned
 
@@ -55,16 +68,30 @@ NO_UWSM - Does not install the hyprland-uwsm.desktop file
 NO_HYPRPM - Does not build and install hyprpm
 [hyprland wiki - customer build flags](https://wiki.hypr.land/Getting-Started/Installation/#custom-build-flags)
 
-## features
+- [ ] optional depedencies should be opt in (and opt out is not yet possible)
+  this is becuase, I am still migrating these scripts out of my dotfiles repo
+- [ ] introduce distro-dir driven script sctructure or sth else,
+  which a dotfile repo can integrate with ease
+- [ ] remove all env.sh git revs, in favor of automatic dependency resolving with
+  only the hyprland verision being set. Have not yet looked into this and
+  do not know how to do this yet. Feel free to help if you know how to.
+- [ ] allow installation to /usr/local instead of /usr which is the default
+  shown in all the hypr-app's READMEs. To avoid conflict with pm installed versions.
+  see [Limitations](#limitation) for more on this
+- [ ] automate the process of reading minimum dependecies
+  all based on hyprland version.
+  this will discard all env variables, in favor of one single one for hyprland
+- [ ] other programms which are based on hyprland TODO: acceptance crit.
 
-TODO: list features and non hyprland apps
+> these are planned, but I do not plan on doing them any time soon.
+The state of this repo already solves its purpose.
+So any additions are just sugar.
 
-- [x] rollback to previous working state
+## supported hyprland stack and hyprland-based-programms
 
-## hypr ecosystem
-
-Uses the `sourcerer` to build the whole hyprland stack from source
-as well as optional dependencies, and other hypr-apps and hypr-programms.
+Uses [sourcerer](https://github.com/RobinMeow/sourcerer) to build the
+whole hyprland stack from source as well as optional dependencies,
+and other hypr-apps and hypr-programms.  
 This includes building 11 dependecnies from source + hyprland itself:
 
 - [x] `hyprland-protocols`
@@ -95,29 +122,15 @@ and other hypr-apps and hypr-programms:
 - [x] `hyprmoncfg` generate a lua configuration for your monitors
   on the fly in a tui
 - [x] `hy3` sway/i3 like window tiling layout strategy
-- [-] `mpvpaper` see [ribynlinux/mpvpaper](https://github.com/RobinMeow/ribynlinux/tree/master/lib/mpvpaper)
+- [ ] `mpvpaper` see [ribynlinux/mpvpaper](https://github.com/RobinMeow/ribynlinux/tree/master/lib/mpvpaper)
   for an example using [sourcerer](https://github.com/RobinMeow/sourcerer)
   on how to build and install mpvpaper from source
-- [-] `wl-freeze` see [ribynlinux/wl-freeze](https://github.com/RobinMeow/ribynlinux/tree/master/lib/wl-freeze)
+- [ ] `wl-freeze` see [ribynlinux/wl-freeze](https://github.com/RobinMeow/ribynlinux/tree/master/lib/wl-freeze)
   for an example using [sourcerer](https://github.com/RobinMeow/sourcerer)
   on how to build and install wl-freeze from source
 
 > `mpvpaper` and `wl-freeze` do not depend on hyprland.
 Therefore they will not be included in this repository.
-
-## planned
-
-- [ ] allow installation to /usr/local instead of /usr which is the default
-  shown in all the hypr-app's READMEs. To avoid conflict with pm installed versions.
-  see [Limitations](#limitation) for more on this
-- [ ] automate the process of reading minimum dependecies
-  all based on hyprland version.
-  this will discard all env variables, in favor of one single one for hyprland
-- [ ] other programms which are based on hyprland TODO: acceptance crit.
-
-> these are planned, but I do not plan on doing them any time soon.
-The state of this repo already solves its purpose.
-So any additions are just sugar.
 
 ## configuration
 
@@ -147,7 +160,8 @@ just keeping this to know how to re-generate it, if ever needed.
   you also updated your hyprland installation accordingly _(as you should)_ it
   will become incredibly difficult to re-build your previous hyprland
   binaries _(version)_. To work around this, you should just update to a latest
-  stable version. Just mentioning this, becuase this repo does support rollbacks
+  stable version.  
+  Just mentioning this, becuase this repo does support rollbacks
   as long as all dependencies did not update with breaking changes.
 - to avoid issues, you may not install any hpyrland stuff using your package manger,
   if it is already installed from source. If you do it anyways, and things get messy,
@@ -155,3 +169,11 @@ just keeping this to know how to re-generate it, if ever needed.
   and then rebuild from source again. Should be fine, but no promises.
   I have done worse and managed to recover, but I do 40h a week of software
   development for a living, so thats not comparable to everyone.
+- a build error can occur wich says something like "this bug is not reproducible"
+  which is not from this scripts.  
+  Its from cmake I think, if you get, just re-run
+  the script. Usually works on the 2nd try. In worst case, run a few times.
+  You are unlikely to get this error, for me I usually get it when testing
+  these scripts in docker, which shares my hardware resources with the main OS
+  and therefore are more likely to run into segmentatin errors.  
+  As I said, just re-run.
