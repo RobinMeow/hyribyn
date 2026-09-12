@@ -16,11 +16,11 @@ exec > >(tee "$logfile") 2>&1
 # https://wiki.hypr.land/FAQ
 # its partly out of date. still nice to have tho.
 
+HYRIBYN=${HYRIBYN_ROOT:-"$HYRIBYN_ROOT/hyribyn"}
 source "$HYRIBYN/lib/hypr/env.sh"
 source "$HYRIBYN/core-utils.sh"
-source "$HYRIBYN/core/run_on_distro.sh"
 
-if on_arch; then
+if on_archlinux; then
 	error "ERROR: Use pacman on archlinux to install hyperland. use pacman -S hyprland instead."
 	exit 1
 elif on_fedora; then
@@ -48,6 +48,7 @@ elif on_fedora; then
 		gcc \
 		gcc-c++
 
+	SOURCERER_DEST="$HYRIBYN_ROOT"
 	source "$HYRIBYN/sourcerer/sourcerer.sh"
 	source "$HYRIBYN/lib/hypr/install-hypr-from-source.sh"
 

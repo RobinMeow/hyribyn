@@ -23,11 +23,11 @@ mostly the same for all.
 ## installation
 
 ```sh
-# HYRIBYN_ROOT: the git directory of all the git repos following the unix posix conventions
+# HYRIBYN_ROOT: the git directory of all the git repos to be cloned
 # for example:
 # ~/.local/share/hyribyn/hyribyn will contain this repository
 # ~/.local/share/hyribyn/hyprland will contain the hyprland repository
-# HYRIBYN_DISTRO: the linux dsitro you are on
+# HYRIBYN_DISTRO: the linux distro you are on
 export HYRIBYN_DISTRO="fedora" \
   && export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
   && git clone --recurse-submodules "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
