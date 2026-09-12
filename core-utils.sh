@@ -28,3 +28,11 @@ exit_with_distro_not_supported_msg() {
 	error "distro is not supported."
 	exit 1
 }
+
+on_archlinux() {
+	[[ "$HYRIBYN_DISTO" == "archlinux" ]]
+}
+
+on_fedora() {
+	[[ "$HYRIBYN_DISTO" == "fedora" ]]
+}

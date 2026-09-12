@@ -7,10 +7,10 @@
 build hyprland from source on non arch distros.
 
 Currently supported distros:
-fedora
+Fedora 44
 
 > Your contributions are welcome to add from source builds for other distros.
-Since I will only maintain fedora, however, however the foundation is the same for
+Since I will only maintain fedora, however the foundation is the same for
 all. Adding another distro is pretty straigt forward. Its mainly just looking for
 the same packages, which might be named differently.
 For example: for a from source build on arch you need the `cairo` package
@@ -23,13 +23,15 @@ mostly the same for all.
 ## installation
 
 ```sh
-# the git directory of all the git repos following the unix posix conventions
+# HYRIBYN_ROOT: the git directory of all the git repos following the unix posix conventions
 # for example:
 # ~/.local/share/hyribyn/hyribyn will contain this repository
 # ~/.local/share/hyribyn/hyprland will contain the hyprland repository
-export HYRIBYN_ROOT=${HYRIBYN_ROOT:-"$HOME/.local/share/hyribyn"} \
+# HYRIBYN_DISTRO: the linux dsitro you are on
+export HYRIBYN_DISTRO="fedora" \
+&& export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
   && git clone "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
-  "$HYRIBYN_ROOT/hyribyn/install.sh"
+  && "$HYRIBYN_ROOT/hyribyn/install.sh"
 ```
 
 > You may freely change HYRIBYN envvariable in your .zshenv / .bashenv

@@ -1,34 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
+# TODO: move each app into its own script
+
+HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
 source "$HYRIBYN/env.sh"
 source "$HYRIBYN/core-utils.sh"
 info "installing hypr"
 
-source "$HYRIBYN/run_on_distro.sh"
 source "$HYRIBYN/install-hypr-from-source.sh"
 
-if on_arch; then
-	sudo pacman -S --needed --noconfirm \
-		hyprland \
-		hyprshutdown \
-		hyprpaper \
-		hyprpolkitagent \
-		xdg-desktop-portal-hyprland \
-		wireplumber \
-		brightnessctl \
-		hyprpicker \
-		hyprlock \
-		qt6ct
-	# hyprpolkitagent auth ui (type in password, when I need admin privl. via GUI apps)
-	# xdg-desktop-portal-hyprland (asks for perm. when an app wants to do outside its own window, for security. e.g. screen sharing via discord)
-	# (wireplumber) wpctl and brightnessctl are used for keybind for multimedia
-	# keyboard buttons, like the fn keys on a laptop
-	# grim slurp swappy: screenshot tools that work good together
-	# qt5ct qt6ct for dark themed qt apps. also required for live switching themes.
-	# removed qt5ct. apparently I can only choose one of em
-	# hyprpicker is just nice to have. install standalone cli tool.
+if on_archlinux; then
+	error "archlinux is not supported. why build from source on arch anyways?"
+	exit 1
 elif on_fedora; then
 	"$HYRIBYN/build-stack-from-source.sh"
 
@@ -118,7 +102,7 @@ hypr_install "hyprmoncfg" \
 	'command -v hyprmoncfg >/dev/null 2>&1 && command -v hyprmoncfgd >/dev/null 2>&1' \
 	build_hyprmoncfg
 
-# TODO: make all non hyprland essentials optional
+# TODO: make all non hyprland apps optional
 if [[ "$HYRIBYN_HY3_ENABLED" == "yes" ]]; then
 	hypr_install "hy3" \
 		"https://github.com/outfoxxed/hy3" \
