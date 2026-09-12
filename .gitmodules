@@ -1,0 +1,3 @@
+[submodule "sourcerer"]
+	path = sourcerer
+	url = https://github.com/RobinMeow/sourcerer.git

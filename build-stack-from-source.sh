@@ -48,7 +48,7 @@ elif on_fedora; then
 		gcc \
 		gcc-c++
 
-	source "$HYRIBYN/core/source-manager.sh"
+	source "$HYRIBYN/sourcerer/sourcerer.sh"
 	source "$HYRIBYN/lib/hypr/install-hypr-from-source.sh"
 
 	# SC2016 $SOURCE_NAME does not expand here on purpose

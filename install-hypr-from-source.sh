@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# TODO: source manager not in this repo yet
-source "$HYRIBYN/source-manager.sh"
+source "$HYRIBYN/sourcerer/sourcerer.sh"
 
 function hypr_build() {
 	# WARN: installs into /usr

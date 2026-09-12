@@ -29,8 +29,8 @@ mostly the same for all.
 # ~/.local/share/hyribyn/hyprland will contain the hyprland repository
 # HYRIBYN_DISTRO: the linux dsitro you are on
 export HYRIBYN_DISTRO="fedora" \
-&& export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
-  && git clone "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
+  && export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
+  && git clone --recurse-submodules "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
   && "$HYRIBYN_ROOT/hyribyn/install.sh"
 ```
 

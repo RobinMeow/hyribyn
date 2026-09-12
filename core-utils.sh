@@ -30,9 +30,9 @@ exit_with_distro_not_supported_msg() {
 }
 
 on_archlinux() {
-	[[ "$HYRIBYN_DISTO" == "archlinux" ]]
+	[[ "$HYRIBYN_DISTRO" == "archlinux" ]]
 }
 
 on_fedora() {
-	[[ "$HYRIBYN_DISTO" == "fedora" ]]
+	[[ "$HYRIBYN_DISTRO" == "fedora" ]]
 }
