@@ -11,7 +11,7 @@ dnf update --refresh --assumeyes && dnf install --assumeyes sudo git bc vim && \
 export HYRIBYN_ROOT="$HOME" \
   && git clone -b "dev" --recurse-submodules "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
   && "$HYRIBYN_ROOT/hyribyn/install-stack.sh" \
-  && "$HYRIBYN_ROOT/hyribyn/sync.sh"
+  && "$HYRIBYN_ROOT/sync.sh"
 
 # alternatively for other distros. example arch
 pacman -Syu --noconfirm && pacman -S --noconfirm sudo git bc vim && \
