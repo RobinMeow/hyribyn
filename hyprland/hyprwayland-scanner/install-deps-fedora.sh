@@ -2,10 +2,4 @@
 set -euo pipefail
 
 sudo dnf install --assumeyes \
-	cmake \
-	gcc \
-	ninja-build \
-	make \
-	unzip \
-	gettext \
-	curl
+	pugixml-devel

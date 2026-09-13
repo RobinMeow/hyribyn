@@ -4,18 +4,18 @@ set -euo pipefail
 export HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
 SOURCERER_DEST="$HYRIBYN_ROOT" source "$HYRIBYN/sourcerer/sourcerer.sh"
 
-function hyprland-protocols_build_and_install() {
+function hyprwayland-scanner_build_and_install() {
 	"$HYRIBYN/common/default-cmake-build-and-install.sh"
 }
 
-function hyprland-protocols_installed() {
+function hyprwayland-scanner_installed() {
 	pkg-config --exists "$SOURCE_NAME"
 }
 
 source "$HYRIBYN/versions.sh"
 
 check_source_state \
-	"hyprland-protocols" \
-	"$HYRIBYN_HYPRLAND_PROTOCOLS_GITREV"
+	"hyprwayland-scanner" \
+	"$HYRIBYN_HYPRWAYLAND_SCANNER_GITREV"
 
-source_git "https://github.com/hyprwm/hyprland-protocols"
+source_git "https://github.com/hyprwm/hyprwayland-scanner.git"

@@ -19,7 +19,7 @@ exec > >(tee "$logfile") 2>&1
 HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
 HYRIBYN_ROOT=${HYRIBYN_ROOT:-"$HOME/.local/share/hyribyn"}
 HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
-source "$HYRIBYN/env.sh"
+source "$HYRIBYN/versions.sh"
 source "$HYRIBYN/core-utils.sh"
 
 if on_archlinux; then

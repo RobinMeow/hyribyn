@@ -75,7 +75,7 @@ NO_HYPRPM - Does not build and install hyprpm
   this is becuase, I am still migrating these scripts out of my dotfiles repo
 - [ ] introduce distro-dir driven script sctructure or sth else,
   which a dotfile repo can integrate with ease
-- [ ] remove all env.sh git revs, in favor of automatic dependency resolving with
+- [ ] remove all versions.sh git revs, in favor of automatic dependency resolving with
   only the hyprland verision being set. Have not yet looked into this and
   do not know how to do this yet. Feel free to help if you know how to.
 - [ ] allow installation to /usr/local instead of /usr which is the default

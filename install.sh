@@ -4,7 +4,7 @@ set -euo pipefail
 # TODO: move each app into its own script
 
 HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
-source "$HYRIBYN/env.sh"
+source "$HYRIBYN/versions.sh"
 source "$HYRIBYN/core-utils.sh"
 info "installing hypr"
 

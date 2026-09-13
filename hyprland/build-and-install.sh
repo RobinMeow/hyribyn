@@ -11,7 +11,7 @@ function hyprland_build_and_install() {
 }
 
 SOURCERER="$HYRIBYN_ROOT" source "$HYRIBYN/sourcerer/sourcerer.sh"
-source "$HYRIBYN/env.sh"
+source "$HYRIBYN/versions.sh"
 
 check_source_state \
 	"hyprland" \
