@@ -221,7 +221,7 @@ just keeping this to know how to re-generate it, if ever needed.
   I have done worse and managed to recover, but I do 40h a week of software
   development for a living, so thats not comparable to everyone.
 - a build error can occur wich says `The bug is not reproducible, so it is
-  likely a hardware or OS problem.`
+  likely a hardware or OS problem.` or `internal compiler error: panic: runtime error: invalid memory address or nil pointer dereference`
   which is not from this scripts.  
   Its from cmake I think, if you get, just re-run
   the script. Usually works on the 2nd try. In worst case, run a few times.
