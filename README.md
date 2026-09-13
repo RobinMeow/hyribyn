@@ -30,12 +30,6 @@ export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
 
 ## dotfiles automated integration
 
-_Im currently extracting these scripts from my dotfiles repo,
-to make the accessable to the community. It functionally works,
-but I would suggest to wait, before integrating it in yours.
-Becuase I'm planning on making structure changes, to make it
-more modular to use._
-
 I recommend using [sourcerer](https://github.com/RobinMeow/sourcerer) to
 clone this repo, and call the corresponding scripts.
 
