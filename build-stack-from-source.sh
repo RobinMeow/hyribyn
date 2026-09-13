@@ -26,9 +26,8 @@ if on_archlinux; then
 	error "ERROR: Use pacman on archlinux to install hyperland. use pacman -S hyprland instead."
 	exit 1
 elif on_fedora; then
-
 	# build order because some of these depend on one another:
-	#  1. hyprland-protocols (According to Dergo from discord "it's a git submodule of most of the apps that require it. If you don't have it system-wide, cmake just uses the submodule. It's just a few xml files needed to build other stuff)
+	#  1. hyprland-protocols
 	#  2. hyprwayland-scanner
 	#  3. hyprutils
 	#  4. hyprgraphics
