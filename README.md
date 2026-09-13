@@ -78,7 +78,8 @@ check_source_state \
 source_git "https://github.com/RobinMeow/hyribyn.git"
 ```
 
-TODO: reference ribynlinux instead
+further examples on how to use sourcerer + hyribyn
+[ribynlinux - hyribyn dotfiles integration](https://github.com/RobinMeow/ribynlinux/blob/master/lib/hypr/install-hyribyn-fedora.sh)
 [sourcerer - dotfiles integration with neovim](https://github.com/RobinMeow/sourcerer#how-to-use-or-install)
 
 ## philosophy and contributions
