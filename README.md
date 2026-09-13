@@ -33,14 +33,17 @@ export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
 
 ## dotfiles automated integration
 
-TODO: write guide on how to integrate and reference my own dotfiles repo
-as an example
-
 _Im currently extracting these scripts from my dotfiles repo,
 to make the accessable to the community. It functionally works,
 but I would suggest to wait, before integrating it in yours.
 Becuase I'm planning on making structure changes, to make it
 more modular to use._
+
+I recommend using [sourcerer](https://github.com/RobinMeow/sourcerer) to
+clone this repo, and call the corresponding scripts.
+
+TODO: write a small code snippet example. Until then checkout out
+the example with neovim in [sourcerer - dotfiles integration with neovim](https://github.com/RobinMeow/sourcerer#how-to-use-or-install)
 
 > You may freely change HYRIBYN envvariable in your .zshenv / .bashenv
 its recommended to put `export HYRIBYN_ROOT="$HOME/.local/share/hyribyn"`
