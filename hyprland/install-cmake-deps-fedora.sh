@@ -2,8 +2,6 @@
 set -euo pipefail
 
 sudo dnf install --assumeyes \
-	ninja-build \
-	make \
-	unzip \
-	gettext \
-	curl
+	cmake \
+	gcc \
+	gcc-c++

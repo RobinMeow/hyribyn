@@ -2,8 +2,6 @@
 set -euo pipefail
 
 sudo dnf install --assumeyes \
-	ninja-build \
-	make \
-	unzip \
-	gettext \
-	curl
+	wayland-protocols-devel \
+	wayland-devel \
+	xorg-x11-server-Xwayland
