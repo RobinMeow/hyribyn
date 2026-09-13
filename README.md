@@ -5,30 +5,27 @@ build hyprland from source with ease on any distro.
 Currently supported distros:
 Fedora 44
 
-> Your contributions are welcome to add from source builds for other distros.
-Since I will only maintain fedora, however the foundation is the same for
-all. Adding another distro is pretty straigt forward. Its mainly just looking for
-the same packages, which might be named differently.
-For example: for a from source build on arch you need the `cairo` package
-`sudo pacman -S cairo` but on fedora you need to install `cairo-devel` package
-`sudo dnf install cairo-devel` and on Ubuntu its the `libcairo2-dev` package
-`sudo apt install libcairo2-dev`. Point is, the same package can have
-different names on different distros. But building and installation is
-mostly the same for all.
-
 ## one time installation
 
+`HYRIBYN_ROOT` is the git directory of all the git repos to be cloned.
+for example:
+`~/.local/share/hyribyn/hyribyn` will contain this repository.
+`~/.local/share/hyribyn/hyprland` will contain the hyprland repository.
+
+`HYRIBYN_DISTRO` is the linux distro you are on.
+`fedora` is the default and does not need to be set.
+`export HYRIBYN_DISTRO="fedora"`
+
+`sync-hyprland-session-target.sh` is for [xdg-desktop-portal](#xdg-desktop-portal).
+You probably want and need this. If not feel free to exclude it.
+>I think when you use uwsm you don't need it.
+I dont use uwsm so can't tell for sure.
+
 ```sh
-# HYRIBYN_ROOT: the git directory of all the git repos to be cloned
-# for example:
-# ~/.local/share/hyribyn/hyribyn will contain this repository
-# ~/.local/share/hyribyn/hyprland will contain the hyprland repository
-# HYRIBYN_DISTRO: the linux distro you are on
-# export HYRIBYN_DISTRO="fedora" # this is the default
 export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
   && git clone --recurse-submodules "https://github.com/RobinMeow/hyribyn" "$HYRIBYN_ROOT/hyribyn" \
   && "$HYRIBYN_ROOT/hyribyn/install.sh" \
-  && "$HYRIBYN_ROOT/hyribyn/sync.sh"
+  && "$HYRIBYN_ROOT/hyribyn/sync-hyprland-session-target.sh"
 ```
 
 ## dotfiles automated integration
@@ -51,14 +48,37 @@ into your dotfiles repository, but not required.
 
 ## philosophy and contributions
 
-minimal, stable
-TODO: add short notes on why this repo exists,
-and mention contributions are welcome, whithin the philosophy
+Feel free to join the [hyribyn discord](https://discord.gg/6AGtnMkpM), if you want
+to contribute. You can also open issues, just make sure to not
+implement stuff without prior elaboration.
 
-join the discord, if you want to contribute.
-You can also open issues, just make sure to not implement stuff
-without prior elaboration.
-[hyribyn discord server](https://discord.gg/6AGtnMkpM)
+- no AI, its just a few lines of code.
+
+> Your contributions are welcome to add install-deps-distro.sh for other distros.
+Since I will only maintain fedora, however the foundation is the same for
+all. Adding another distro is pretty straigt forward. Its mainly just looking for
+the same packages, which might be named differently.
+For example: for a from source build on arch you need the `cairo` package
+`sudo pacman -S cairo` but on fedora you need to install `cairo-devel` package
+`sudo dnf install cairo-devel` and on Ubuntu its the `libcairo2-dev` package
+`sudo apt install libcairo2-dev`. Point is, the same package can have
+different names on different distros. But building and installation is
+mostly the same for all.
+
+### hyprapps
+
+if you wish to contribute the scripts for another hyprapp, lets say `hyprsunset`
+seek elaboration with me first.
+If I should decline an app, you can always just fork, or use [sourcerer](https://github.com/RobinMeow/sourcerer)
+to implement it for your own needs. `sourcerer` results in less boiletplate code,
+but you can just write your own script.
+
+One acceptance criteria is, that I do not include apps, which are heavily AI
+maintained. You can see this by a top-level AGENTS.md file, or if you look
+into the git history and see many fix commits, its usually a sign of AI driven
+projets. If it has alot of fixes (therefore unstable) I dont care if its
+AI driven or not. If I include unstable repo in here, my the maintenance I
+have to do rises for other peoples mistakes.
 
 ### Planned
 
@@ -71,23 +91,16 @@ NO_UWSM - Does not install the hyprland-uwsm.desktop file
 NO_HYPRPM - Does not build and install hyprpm
 [hyprland wiki - customer build flags](https://wiki.hypr.land/Getting-Started/Installation/#custom-build-flags)
 
-- [ ] optional depedencies should be opt in (and opt out is not yet possible)
-  this is becuase, I am still migrating these scripts out of my dotfiles repo
-- [ ] introduce distro-dir driven script sctructure or sth else,
-  which a dotfile repo can integrate with ease
 - [ ] remove all versions.sh git revs, in favor of automatic dependency resolving with
   only the hyprland verision being set. Have not yet looked into this and
   do not know how to do this yet. Feel free to help if you know how to.
 - [ ] allow installation to /usr/local instead of /usr which is the default
   shown in all the hypr-app's READMEs. To avoid conflict with pm installed versions.
   see [Limitations](#limitation) for more on this
-- [ ] automate the process of reading minimum dependecies
-  all based on hyprland version.
-  this will discard all env variables, in favor of one single one for hyprland
-- [ ] other programms which are based on hyprland TODO: acceptance crit.
+- [ ] other programms which are based on hyprland
 
 > these are planned, but I do not plan on doing them any time soon.
-The state of this repo already solves its purpose.
+The state of this repo already solves its purpose, way beyond than needed.
 So any additions are just sugar.
 
 ## supported hyprland stack and hyprland-based-programms

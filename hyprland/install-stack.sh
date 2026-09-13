@@ -34,4 +34,4 @@ export HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
 
 # sync session target (dont remember if this was a hyprland dep)
 # or just for xdg-desktop-portal-hyprland
-"$HYRIBYN/hyprland/sync.sh"
+"$HYRIBYN/hyprland/sync-hyprland-session-target.sh"
