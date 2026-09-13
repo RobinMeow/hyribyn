@@ -16,7 +16,11 @@ export HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
 "$HYRIBYN/common/install.sh" "hyprgraphics"
 "$HYRIBYN/common/install.sh" "hyprlang"
 "$HYRIBYN/common/install.sh" "hyprcursor"
+
+# aquamarine depends on this, as well as others
+"$HYRIBYN/hyprland/install-wayland-deps.sh"
 "$HYRIBYN/common/install.sh" "aquamarine"
+
 "$HYRIBYN/common/install.sh" "xdg-desktop-portal-hyprland"
 "$HYRIBYN/common/install.sh" "hyprwire"
 "$HYRIBYN/common/install.sh" "hyprtoolkit"
@@ -27,9 +31,3 @@ export HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
 
 # runtime-only dependency. formerly hyprland-qtutils
 "$HYRIBYN/common/install.sh" "hyprland-guiutils"
-
-# TODO: move the up and as far down as possible
-# wayland dependencies. Almost all projects
-# depend on this, I deferred its installation
-# as far as I know.
-"$HYRIBYN/hyprland/install-wayland-deps.sh"
