@@ -33,12 +33,53 @@ export HYRIBYN_ROOT="$HOME/.local/share/hyribyn" \
 I recommend using [sourcerer](https://github.com/RobinMeow/sourcerer) to
 clone this repo, and call the corresponding scripts.
 
-TODO: write a small code snippet example. Until then checkout out
-the example with neovim in [sourcerer - dotfiles integration with neovim](https://github.com/RobinMeow/sourcerer#how-to-use-or-install)
+```sh
+# hyribyn will be cloned in ~/.local/share/ribyn/hyribyn
+export HYRIBYN="$HOME/.local/share/ribyn/"
+# you gotta replace the filepath with whereever your sourcerer script is
+SOURCERER_DEST="$HYRIBYN" source "$HOME/path/to/your/sourcerer.sh"
 
-> You may freely change HYRIBYN envvariable in your .zshenv / .bashenv
-its recommended to put `export HYRIBYN_ROOT="$HOME/.local/share/hyribyn"`
-into your dotfiles repository, but not required.
+function hyribyn_installed() {
+  # never consider it to be installed.
+  # hyribyn is already idempotent and knows what it needs to run what not.
+  return 1 # its an exit code, not a boolean
+}
+
+function hyribyn_build_and_install() {
+  # use fedora as target distro
+  export HYRIBYN_DISTRO="fedora"
+
+  # this is where hyribyn will clone all the git repos,
+  # build, install and update them.
+  # hyribyn will also look in here for its own git location
+  # unless you set HYRIBYN
+  # replace ribyn with your username, or dont set it at all
+  export HYRIBYN_ROOT="$HOME/.local/share/ribyn"
+
+  # install all hyprland dependencies, hyprland itself,
+  # and hyprland runtime dependencies
+  "$HYRIBYN/hyprland/install-stack.sh"
+
+  # call only the apps you wish to have, in any order
+  "$HYRIBYN/common/install-app.sh" "hyprshutdown"
+  "$HYRIBYN/common/install-app.sh" "hyprlock"
+  "$HYRIBYN/common/install-app.sh" "hyprpaper"
+  "$HYRIBYN/common/install-app.sh" "hyprpolkitagent"
+
+  # dont call em, if you dont want em, duh :)
+  # "$HYRIBYN/common/install-app.sh" "hyprpicker"
+  # "$HYRIBYN/common/install-app.sh" "hy3"
+}
+
+check_source_state \
+  "hyribyn" \
+  "hl0.56.0"
+
+source_git "https://github.com/RobinMeow/hyribyn.git"
+```
+
+TODO: reference ribynlinux instead
+[sourcerer - dotfiles integration with neovim](https://github.com/RobinMeow/sourcerer#how-to-use-or-install)
 
 ## philosophy and contributions
 
@@ -179,7 +220,8 @@ just keeping this to know how to re-generate it, if ever needed.
   and then rebuild from source again. Should be fine, but no promises.
   I have done worse and managed to recover, but I do 40h a week of software
   development for a living, so thats not comparable to everyone.
-- a build error can occur wich says something like "this bug is not reproducible"
+- a build error can occur wich says `The bug is not reproducible, so it is
+  likely a hardware or OS problem.`
   which is not from this scripts.  
   Its from cmake I think, if you get, just re-run
   the script. Usually works on the 2nd try. In worst case, run a few times.
