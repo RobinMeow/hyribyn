@@ -18,7 +18,7 @@ export HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
 "$HYRIBYN/common/install.sh" "hyprcursor"
 
 # aquamarine depends on this, as well as others
-"$HYRIBYN/hyprland/install-wayland-deps.sh"
+"$HYRIBYN/hyprland/install-wayland-deps-fedora.sh"
 "$HYRIBYN/common/install.sh" "aquamarine"
 
 "$HYRIBYN/common/install.sh" "xdg-desktop-portal-hyprland"
