@@ -10,7 +10,7 @@ function hyprland_build_and_install() {
 	sudo make install
 }
 
-SOURCERER="$HYRIBYN_ROOT" source "$HYRIBYN/sourcerer/sourcerer.sh"
+SOURCERER_DEST="$HYRIBYN_ROOT" source "$HYRIBYN/sourcerer/sourcerer.sh"
 source "$HYRIBYN/versions.sh"
 
 check_source_state \
