@@ -5,6 +5,9 @@ build hyprland from source with ease on any distro.
 Currently supported distros:
 Fedora 44
 
+Supported Hyprland Version:
+hl0.56.0
+
 ## one time installation
 
 `HYRIBYN_ROOT` is the git directory of all the git repos to be cloned.
