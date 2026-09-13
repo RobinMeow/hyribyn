@@ -31,3 +31,7 @@ export HYRIBYN_DISTRO=${HYRIBYN_DISTRO:-"fedora"}
 
 # runtime-only dependency. formerly hyprland-qtutils
 "$HYRIBYN/common/install.sh" "hyprland-guiutils"
+
+# sync session target (dont remember if this was a hyprland dep)
+# or just for xdg-desktop-portal-hyprland
+"$HYRIBYN/hyprland/sync.sh"
