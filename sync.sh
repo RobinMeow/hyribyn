@@ -4,8 +4,7 @@ set -euo pipefail
 export HYRIBYN_ROOT=${HYRIBYN_ROOT:-"$HOME/.local/share/hyribyn"}
 export HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
 source "$HYRIBYN/versions.sh"
-source "$HYRIBYN/core-utils.sh"
-info "syncing hypr"
+echo "syncing hypr"
 
 # TODO: this needs documentation in README.md
 rsync -rlpt \

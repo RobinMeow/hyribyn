@@ -5,13 +5,12 @@ set -euo pipefail
 
 HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
 source "$HYRIBYN/versions.sh"
-source "$HYRIBYN/core-utils.sh"
-info "installing hypr"
+echo "installing hypr"
 
 source "$HYRIBYN/install-hypr-from-source.sh"
 
 if on_archlinux; then
-	error "archlinux is not supported. why build from source on arch anyways?"
+	echo "archlinux is not supported. why build from source on arch anyways?"
 	exit 1
 elif on_fedora; then
 	"$HYRIBYN/build-stack-from-source.sh"
