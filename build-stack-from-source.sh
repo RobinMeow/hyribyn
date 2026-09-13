@@ -145,15 +145,15 @@ elif on_fedora; then
 		"$HYRIBYN_HYPRTOOLKIT_GITREV" \
 		"$pkg_config_exists"
 
-	is_hyprland_guiutils_installed='command -v hyprland-dialog >/dev/null 2>&1'
-	is_hyprland_guiutils_installed="${is_hyprland_guiutils_installed} && command -v hyprland-donate-screen >/dev/null 2>&1"
-	is_hyprland_guiutils_installed="${is_hyprland_guiutils_installed} && command -v hyprland-run >/dev/null 2>&1"
-	is_hyprland_guiutils_installed="${is_hyprland_guiutils_installed} && command -v hyprland-update-screen >/dev/null 2>&1"
-	is_hyprland_guiutils_installed="${is_hyprland_guiutils_installed} && command -v hyprland-welcome >/dev/null 2>&1"
+	is_guiutils_installed='command -v hyprland-dialog >/dev/null 2>&1'
+	is_guiutils_installed="${is_guiutils_installed} && command -v hyprland-donate-screen >/dev/null 2>&1"
+	is_guiutils_installed="${is_guiutils_installed} && command -v hyprland-run >/dev/null 2>&1"
+	is_guiutils_installed="${is_guiutils_installed} && command -v hyprland-update-screen >/dev/null 2>&1"
+	is_guiutils_installed="${is_guiutils_installed} && command -v hyprland-welcome >/dev/null 2>&1"
 	hypr_install "hyprland-guiutils" \
 		"https://github.com/hyprwm/hyprland-guiutils" \
 		"$HYRIBYN_HYPRLAND_GUIUTILS_GITREV" \
-		"$is_hyprland_guiutils_installed"
+		"$is_guiutils_installed"
 
 	sudo dnf install --assumeyes \
 		glslang-devel \
