@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HYRIBYN="$HYRIBYN_ROOT/hyribyn"
+export HYRIBYN=${HYRIBYN:-"$HYRIBYN_ROOT/hyribyn"}
 SOURCERER_DEST="$HYRIBYN_ROOT" source "$HYRIBYN/sourcerer/sourcerer.sh"
 
 function hyprland-protocols_build_and_install() {
