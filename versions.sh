@@ -33,3 +33,9 @@ export HYRIBYN_HYPRMONCFG_GITREV=${HYRIBYN_HYPRMONCFG_GITREV:-"v1.13.0"}
 # which build againgst the latest untagged hyprland release
 # which is similar to pacman updates and unlikely to break
 export HYRIBYN_HY3_GITREV=${HYRIBYN_HY3_GITREV:-"hl0.56.0"}
+
+# https://alejandrominaya.github.io/hyprland-lua-docs/
+# when setting the env to specific git revs it is helpful to know, that
+# you need to try to build it in docker, to get the required deps, you
+# can just look into the `CMakeLists.txt` to see execat minimum dependencies
+# and optional depencencies.

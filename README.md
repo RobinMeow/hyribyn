@@ -1,11 +1,11 @@
 # hyribyn
 
-build hyprland from source with ease on any distro.
+build hyprland from source with ease.
 
-Currently supported distros:
+Currently supported distros:  
 Fedora 44
 
-Supported Hyprland Version:
+Supported and tested Hyprland Versions:  
 hl0.56.0
 
 ## one time installation
@@ -81,73 +81,104 @@ check_source_state \
 source_git "https://github.com/RobinMeow/hyribyn.git"
 ```
 
-further examples on how to use sourcerer + hyribyn
-[ribynlinux - hyribyn dotfiles integration](https://github.com/RobinMeow/ribynlinux/blob/master/lib/hypr/install-hyribyn-fedora.sh)
-[sourcerer - dotfiles integration with neovim](https://github.com/RobinMeow/sourcerer#how-to-use-or-install)
+This is the way I did it, on my dotfile repo. [See here](https://github.com/RobinMeow/ribynlinux/blob/master/lib/hypr/install-hyribyn-fedora.sh)
+for an example.  
+Or an [example building neovim from source using sorcerer](https://github.com/RobinMeow/sourcerer#how-to-use-or-install)
 
-## philosophy and contributions
+## How to build the latest "stable" version automatically
+
+Look at the environment variables in [./versions.sh](./versions.sh).
+Before running the scripts, export all of these, and set the strings to
+`latest-tag`. This is a feature by [sourcerer](https://github.com/RobinMeow/sourcerer)
+which builds against the latest available git tag using standard versioning.
+Most of the time it will just work, and behave **similar** to `pacman` updates.
+
+> I personally don't like, nor use this. But who am I to tell you what to do :)
+
+## How to build a specific hyprland version
+
+you can checkout this repository using git tags. using this versioning scheme:
+`hlx.x.x`. So if you want to build hyprland 0.56.0 you checkout this
+repository at `hl0.56.0` and run the scripts. Thats it.  
+
+However not every single version is included here, especially not older versions.
+This is okay, you can still build them, just a bit more work.
+Look at the environment variables in [./versions.sh](./versions.sh).  
+You need to export these variables in the versions you want to build against,
+before running the scripts. Thats it for most use cases, but you might need to install
+some packages which were needed in the past, or added in the future.  
+
+## How to build the absolute latest development commit
+
+same as the above honestly, just specify the dev branch in the string.
+e.g. `origin/dev`. You can even build against feature-branches
+which are currently in development if you want to. Commit hashes
+are also supported. Everything [sourcerer](https://github.com/RobinMeow/sourcerer)
+supports, this repo supports also.
+
+> Saying you can build against any commit hash, does not mean, it will build
+or run successfully. This is for advanced users, who know what they are doing,
+or people who just wanna mess around in a VM.
+
+## Contributions
 
 Feel free to join the [hyribyn discord](https://discord.gg/6AGtnMkpM), if you want
 to contribute. You can also open issues, just make sure to not
 implement stuff without prior elaboration.
 
-- no AI, its just a few lines of code.
+- no AI. everything is hand written.
 
-> Your contributions are welcome to add install-deps-distro.sh for other distros.
-Since I will only maintain fedora, however the foundation is the same for
-all. Adding another distro is pretty straigt forward. Its mainly just looking for
-the same packages, which might be named differently.
+## How to support other distros
+
+I will only maintain fedora, however the foundation is the same for
+all. Adding another distro is straight forward _(for most distros)_.
+Its mainly just looking for the same packages, which might be named differently.
 For example: for a from source build on arch you need the `cairo` package
 `sudo pacman -S cairo` but on fedora you need to install `cairo-devel` package
 `sudo dnf install cairo-devel` and on Ubuntu its the `libcairo2-dev` package
 `sudo apt install libcairo2-dev`. Point is, the same package can have
 different names on different distros. But building and installation is
-mostly the same for all.
+mostly the same for all.  
+**Each repository has a `install-deps-fedora.sh` script. Copy it to
+`install-deps-distroname.sh`, and change the package names for the distro you wish
+to implement.**
 
 ### hyprapps
 
-if you wish to contribute the scripts for another hyprapp, lets say `hyprsunset`
-seek elaboration with me first.
-If I should decline an app, you can always just fork, or use [sourcerer](https://github.com/RobinMeow/sourcerer)
-to implement it for your own needs. `sourcerer` results in less boiletplate code,
-but you can just write your own script.
-
-One acceptance criteria is, that I do not include apps, which are heavily AI
-maintained. You can see this by a top-level AGENTS.md file, or if you look
-into the git history and see many fix commits, its usually a sign of AI driven
-projets. If it has alot of fixes (therefore unstable) I dont care if its
-AI driven or not. If I include unstable repo in here, my the maintenance I
-have to do rises for other peoples mistakes.
+If you wish to contribute the scripts for another hyprapp, e.g. `hyprsunset`
+seek elaboration with me first, using the hyribyn discord or github issues.
 
 ### Planned
 
-**custom build flags:**
-integrate these build flags so you can disable the ones you dont need,
-for a even more minimal build.
-NO_XWAYLAND - Removes XWayland support
-NO_SYSTEMD - Removes systemd dependencies
-NO_UWSM - Does not install the hyprland-uwsm.desktop file
-NO_HYPRPM - Does not build and install hyprpm
-[hyprland wiki - customer build flags](https://wiki.hypr.land/Getting-Started/Installation/#custom-build-flags)
-
-- [ ] remove all versions.sh git revs, in favor of automatic dependency resolving with
-  only the hyprland verision being set. Have not yet looked into this and
-  do not know how to do this yet. Feel free to help if you know how to.
-- [ ] allow installation to /usr/local instead of /usr which is the default
-  shown in all the hypr-app's READMEs. To avoid conflict with pm installed versions.
-  see [Limitations](#limitation) for more on this
+- [ ] allow to only specify the hyprland version, and have a depenceny resolver
+  at runtime, which resolves the latest support version for each dependency.
+  _(not the latest minimum supported version)_
+- [ ] allow installation to `/usr/local` instead of `/usr` and use it as default.
+  easy to implement as expirimental.
+  But testing it at runtime takes some time for me.
 - [ ] other programms which are based on hyprland
 
-> these are planned, but I do not plan on doing them any time soon.
-The state of this repo already solves its purpose, way beyond than needed.
-So any additions are just sugar.
+> the state of this repo already serves it purpose for me.  
+If you wish something to be done. Open an issue or upvote an existing one.
 
-## supported hyprland stack and hyprland-based-programms
+### Not planned
+
+- [hyprland wiki - customer build flags](https://wiki.hypr.land/Getting-Started/Installation/#custom-build-flags)
+  the original distribution of binaries by the hyprland team in arch (using pacman)
+  does not strip those out either. Not only you increase risk of breakage, but you
+  increase maintenance just for a few kilobytes of disk space
+- apps which do not depend on hyprland. e.g. [mpvpaper](https://github.com/GhostNaN/mpvpaper)
+  and [wl-freeze](https://github.com/Zerodya/wl-freeze). You can check out my
+  dotfiles repo for examples on how to build [mpvpaper with sourcer](https://github.com/RobinMeow/ribynlinux/tree/master/lib/mpvpaper)
+  or [wl-freeze with sourcerer](https://github.com/RobinMeow/ribynlinux/tree/master/lib/wl-freeze)
+  from source
+- older versions prior to hyprland 0.56.0
+
+## supported hyprland stack and hyprapps
 
 Uses [sourcerer](https://github.com/RobinMeow/sourcerer) to build the
 whole hyprland stack from source as well as optional dependencies,
-and other hypr-apps and hypr-programms.  
-This includes building 11 dependecnies from source + hyprland itself:
+and other hyprapps.  
 
 - [x] `hyprland-protocols`
 - [x] `hyprwayland-scanner`
@@ -166,70 +197,18 @@ and a runtime only dependency which the FAQ does not mention:
 
 - [x] `hyprland-guiutils`_(runtime-only dependency. formerly hyprland-qtutils)_
 
-and other hypr-apps and hypr-programms:
+and other hyprapps:
 
 - [x] `hyprpolkitagent` to use hyprlands optional permission system
 - [x] `hyprshutdown` logging out of hyprland. the official recommended way.
 - [x] `hyprpaper` background wallpaper engine
 - [x] `hyprlock` lockscreen
 - [x] `hyprpicker` use your mouse as color picker on whatever the screen is
-  rendering currently (nice for ricing)
+  rendering currently _(handy for people who enjoy ricing)_
 - [x] `hyprmoncfg` generate a lua configuration for your monitors
   on the fly in a tui
 - [x] `hy3` sway/i3 like window tiling layout strategy
-- [ ] `mpvpaper` see [ribynlinux/mpvpaper](https://github.com/RobinMeow/ribynlinux/tree/master/lib/mpvpaper)
-  for an example using [sourcerer](https://github.com/RobinMeow/sourcerer)
-  on how to build and install mpvpaper from source
-- [ ] `wl-freeze` see [ribynlinux/wl-freeze](https://github.com/RobinMeow/ribynlinux/tree/master/lib/wl-freeze)
-  for an example using [sourcerer](https://github.com/RobinMeow/sourcerer)
-  on how to build and install wl-freeze from source
 
-> `mpvpaper` and `wl-freeze` do not depend on hyprland.
-Therefore they will not be included in this repository.
+## Troubleshooting
 
-## configuration
-
-[hyprland lua docs](https://alejandrominaya.github.io/hyprland-lua-docs/)
-
-when setting the env to specific git revs it is helpful to know, that
-you need to try to build it in docker, to get the required deps, you
-can just look into the `CMakeLists.txt` to see execat minimum dependencies
-and optional depencencies.
-
-## xdg-desktop-portal
-
-hyprland-session.target
-xdg-desktop-portal requires a graphical session target or it refuses to start.
-`systemctl --user edit --full --force hyprland-session.target`
-to create the config file
-
-> this has been done already. and is put into this repo as file.
-just keeping this to know how to re-generate it, if ever needed.
-
-## Limitation
-
-- arch uses `pacman` as package manager. Which does not allow to install older versions
-  of a package. _(You wouldnt be on a rolling-distro like arch if this is important
-  to you)_ This means, if a dependency, lets say `cairo` makes an update with a
-  breaking change, and hyprland also updates accordingly _(as it should)_ and
-  you also updated your hyprland installation accordingly _(as you should)_ it
-  will become incredibly difficult to re-build your previous hyprland
-  binaries _(version)_. To work around this, you should just update to a latest
-  stable version.  
-  Just mentioning this, becuase this repo does support rollbacks
-  as long as all dependencies did not update with breaking changes.
-- to avoid issues, you may not install any hpyrland stuff using your package manger,
-  if it is already installed from source. If you do it anyways, and things get messy,
-  you should uninstall the ones you installed with your package manager,
-  and then rebuild from source again. Should be fine, but no promises.
-  I have done worse and managed to recover, but I do 40h a week of software
-  development for a living, so thats not comparable to everyone.
-- a build error can occur wich says `The bug is not reproducible, so it is
-  likely a hardware or OS problem.` or `internal compiler error: panic: runtime error: invalid memory address or nil pointer dereference`
-  which is not from this scripts.  
-  Its from cmake I think, if you get, just re-run
-  the script. Usually works on the 2nd try. In worst case, run a few times.
-  You are unlikely to get this error, for me I usually get it when testing
-  these scripts in docker, which shares my hardware resources with the main OS
-  and therefore are more likely to run into segmentatin errors.  
-  As I said, just re-run.
+see [./troubleshooting.md](./troubleshooting.md)

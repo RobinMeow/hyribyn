@@ -24,3 +24,8 @@ else
 		"$HYRIBYN/hyprland/hyprland-session.target" \
 		"$HOME/.config/systemd/user/"
 fi
+
+# xdg-desktop-portal requires a graphical session target or it refuses to start.
+# how to regenerate the hyprland-session.target:
+# `systemctl --user edit --full --force hyprland-session.target`
+# will create the config file
